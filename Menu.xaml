@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Controls.Menu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="640">
+    <Canvas Height="480" Width="640">
+        <Rectangle Height="67" Width="400" StrokeThickness="3" Stroke="Purple" Canvas.Left="0" Canvas.Top="171"></Rectangle>
+        <Canvas Height="480" Width="80" Name="Category" Canvas.Left="0" Canvas.Top="0">
+            <Label Background="Purple" Foreground="White" Content="Category" Height="26" Width="80"></Label>
+        </Canvas>
+        <Canvas Height="480" Width="80" Name="Item" Canvas.Left="80" Canvas.Top="0">
+            <Label Content="Item"></Label>
+        </Canvas>
+        <Canvas Height="480" Width="80" Name="Size" Canvas.Left="160">
+            <Label Content="Size"></Label>
+        </Canvas>
+        <Canvas Height="480" Width="80" Name="Amount" Canvas.Left="240">
+            <Label Content="Amount"></Label>
+        </Canvas>
+        <Canvas Height="480" Width="80" Name="Other" Canvas.Left="320">
+            <Label Content="?"></Label>
+        </Canvas>
+        <Canvas Height="148" Width="101" Name="CurrentItem" Canvas.Left="406" Canvas.Top="320">
+            <Label Content="Current Item"></Label>
+        </Canvas>
+        <Canvas Height="314" Width="240" Name="Order" Canvas.Left="400" Canvas.Top="0">
+            <Label Content="Order"></Label>
+        </Canvas>
+        <MediaElement Height="148" Width="127" Name="Video" Canvas.Left="513" Canvas.Top="320"></MediaElement>
+    </Canvas>
+</UserControl>
