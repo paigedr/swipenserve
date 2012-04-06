@@ -4,30 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="640">
-    <Canvas Height="480" Width="640">
-        <Rectangle Height="67" Width="400" StrokeThickness="3" Stroke="Purple" Canvas.Left="0" Canvas.Top="171"></Rectangle>
-        <Canvas Height="480" Width="80" Name="Category" Canvas.Left="0" Canvas.Top="0">
-            <Label Background="Purple" Foreground="White" Content="Category" Height="26" Width="80"></Label>
-        </Canvas>
-        <Canvas Height="480" Width="80" Name="Item" Canvas.Left="80" Canvas.Top="0">
-            <Label Content="Item"></Label>
-        </Canvas>
-        <Canvas Height="480" Width="80" Name="Size" Canvas.Left="160">
-            <Label Content="Size"></Label>
-        </Canvas>
-        <Canvas Height="480" Width="80" Name="Amount" Canvas.Left="240">
-            <Label Content="Amount"></Label>
-        </Canvas>
-        <Canvas Height="480" Width="80" Name="Other" Canvas.Left="320">
-            <Label Content="?"></Label>
-        </Canvas>
-        <Canvas Height="148" Width="101" Name="CurrentItem" Canvas.Left="406" Canvas.Top="320">
-            <Label Content="Current Item"></Label>
-        </Canvas>
-        <Canvas Height="314" Width="240" Name="Order" Canvas.Left="400" Canvas.Top="0">
-            <Label Content="Order"></Label>
-        </Canvas>
-        <MediaElement Height="148" Width="127" Name="Video" Canvas.Left="513" Canvas.Top="320"></MediaElement>
-    </Canvas>
+             d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded">
+    <Grid Height="480" Width="640">
+        <Rectangle Height="80" StrokeThickness="3" Stroke="Purple" Margin="0,100,246,209"></Rectangle>
+        <StackPanel Height="480" Width="80" Name="Category" Margin="1,0,559,0">
+            <Label Content="Category" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="cat1"></Image>
+            <Image Name="cat2"></Image>
+            <Image Name="cat3"></Image>
+        </StackPanel>
+        <StackPanel Height="480" Width="80" Name="Item" Margin="81,0,479,0">
+            <Label Content="Item" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="item1"></Image>
+            <Image Name="item2"></Image>
+            <Image Name="item3"></Image>
+        </StackPanel>
+        <StackPanel Height="480" Name="Size" Margin="158,0,403,0">
+            <Label Content="Size" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="size1"></Image>
+            <Image Name="size2"></Image>
+            <Image Name="size3"></Image>
+        </StackPanel>
+        <StackPanel Height="480" Width="80" Name="Amount" Margin="236,0,324,0">
+            <Label Content="Amount" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="amount1"></Image>
+            <Image Name="amount2"></Image>
+            <Image Name="amount3"></Image>
+        </StackPanel>
+        <StackPanel Height="480" Width="80" Name="Other" Margin="314,0,246,0">
+            <Label Content="?" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="option1"></Image>
+            <Image Name="option2"></Image>
+            <Image Name="option3"></Image>
+        </StackPanel>
+        <StackPanel Name="CurrentItem" Margin="392,312,0,0" HorizontalAlignment="Left" Width="80">
+            <Label Content="Current Item" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Image Name="current"></Image>
+        </StackPanel>
+        <StackPanel Height="314" Width="250" Name="Order" Margin="392,0,0,166">
+            <Label Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
+            <Label Name="line1"></Label>
+            <Label Name="line2"></Label>
+            <Label Name="line3"></Label>
+            <Label Name="line4"></Label>
+        </StackPanel>
+        <MediaElement Name="Video" Canvas.Left="513" Canvas.Top="320" Margin="472,312,-2,0"></MediaElement>
+    </Grid>
 </UserControl>
