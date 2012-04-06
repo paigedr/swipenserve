@@ -23,5 +23,11 @@ namespace InteractivePrototype
         {
             InitializeComponent();
         }
+
+        private void Intro_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //this is a test from Ashley 
     }
 }
