@@ -28,6 +28,9 @@ namespace InteractivePrototype
         {
 
         }
-        
+
+        private void swipeComplete_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

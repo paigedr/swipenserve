@@ -3,5 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:Controls"
         Title="MainWindow" Height="530" Width="660">
+    <Grid>
         <Controls:Intro Loaded="Intro_Loaded"></Controls:Intro>
+        <Controls:Menu></Controls:Menu>
+    </Grid>
 </Window>

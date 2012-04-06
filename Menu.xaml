@@ -9,37 +9,39 @@
         <Rectangle Height="80" StrokeThickness="3" Stroke="Purple" Margin="0,100,246,209"></Rectangle>
         <StackPanel Height="480" Width="80" Name="Category" Margin="1,0,559,0">
             <Label Content="Category" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="cat1"></Image>
-            <Image Name="cat2"></Image>
-            <Image Name="cat3"></Image>
+            <Image Name="cat1" Height="75" Margin="0,47,0,0"></Image>
+            <Image Name="cat2" Height="75"></Image>
+            <Image Name="cat3" Height="75"></Image>
         </StackPanel>
         <StackPanel Height="480" Width="80" Name="Item" Margin="81,0,479,0">
             <Label Content="Item" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="item1"></Image>
-            <Image Name="item2"></Image>
-            <Image Name="item3"></Image>
+            <Image Name="item1" Height="75" Margin="0,47,0,0"></Image>
+            <Image Name="item2" Height="75"></Image>
+            <Image Name="item3" Height="75"></Image>
         </StackPanel>
         <StackPanel Height="480" Name="Size" Margin="158,0,403,0">
             <Label Content="Size" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="size1"></Image>
-            <Image Name="size2"></Image>
-            <Image Name="size3"></Image>
+            <Label Name="size1" Height="75" Margin="0,47,0,0"></Label>
+            <Label Name="size2" Height="75"></Label>
+            <Label Name="size3" Height="75"></Label>
         </StackPanel>
         <StackPanel Height="480" Width="80" Name="Amount" Margin="236,0,324,0">
             <Label Content="Amount" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="amount1"></Image>
-            <Image Name="amount2"></Image>
-            <Image Name="amount3"></Image>
+            <Image Name="amount1" Height="75" Margin="0,47,0,0"></Image>
+            <Image Name="amount2" Height="75"></Image>
+            <Image Name="amount3" Height="75"></Image>
         </StackPanel>
-        <StackPanel Height="480" Width="80" Name="Other" Margin="314,0,246,0">
+        <StackPanel Height="480" Width="80" Name="Options" Margin="314,0,246,0">
             <Label Content="?" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="option1"></Image>
-            <Image Name="option2"></Image>
-            <Image Name="option3"></Image>
+            <Label Name="option1" Height="75" Margin="0,47,0,0"></Label>
+            <Label Name="option2" Height="75"></Label>
+            <Label Name="option3" Height="75"></Label>
         </StackPanel>
         <StackPanel Name="CurrentItem" Margin="392,312,0,0" HorizontalAlignment="Left" Width="80">
             <Label Content="Current Item" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
-            <Image Name="current"></Image>
+            <Image Name="current" Height="75"></Image>
+            <Label Name="currentName"></Label>
+            <Label Name="currentPrice"></Label>
         </StackPanel>
         <StackPanel Height="314" Width="250" Name="Order" Margin="392,0,0,166">
             <Label Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
@@ -47,7 +49,12 @@
             <Label Name="line2"></Label>
             <Label Name="line3"></Label>
             <Label Name="line4"></Label>
+            <Label Name="total" Background="Purple" Foreground="White" Content="Total" Margin="0,160,0,0"></Label>
+            <Label Name="totalPrice" Content="$0.00" FontWeight="Bold" FontSize="36"></Label>
         </StackPanel>
-        <MediaElement Name="Video" Canvas.Left="513" Canvas.Top="320" Margin="472,312,-2,0"></MediaElement>
+        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,328,62,12" Click="up_Click"></Button>
+        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,415,62,35" Click="down_Click"></Button>
+        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click"></Button>
+        <Button Name="right" Width="50" Height="30" Content="Right" Margin="572,373,18,77" Click="right_Click"></Button>
     </Grid>
 </UserControl>

@@ -23,5 +23,10 @@ namespace Controls
         {
             InitializeComponent();
         }
+
+        private void swipeComplete_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = System.Windows.Visibility.Hidden;
+        }
     }
 }

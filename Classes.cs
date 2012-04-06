@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InteractivePrototype
+namespace Controls
 {
     public class Item
     {
@@ -47,7 +47,11 @@ namespace InteractivePrototype
             else
                 i.Source = new BitmapImage(new Uri(this.Image(), UriKind.Relative));
         }
-
+        // Sets the content of the given label to this item's name.
+        public void SetLabel(Label l)
+        {
+            l.Content = this.name;
+        }
         //// ACCESSOR FUNCTIONS
         // <Important>
         public string Name()
@@ -71,7 +75,7 @@ namespace InteractivePrototype
     public class ItemList
     {
         protected List<Item> items; // Contains the items.
-        protected int selected = 0; // The index of the currently selected item.
+        protected int selected = 1; // The index of the currently selected item.
         public Boolean[] multiselected; // A boolean array where corresponding t/f values determine if an item is multi-selected. (all false by default)
         private Item nullitem = new Item("", ""); // Creates a null item. Set the image path to that of a blank image!
 
@@ -116,9 +120,20 @@ namespace InteractivePrototype
                 if (displaytype == 0)
                     this.Item(newindex).SetImage(img[i], (newindex == selected) || MultiSelected(newindex));
                 else if (displaytype == -1)
-                    this.Item(newindex).SetImage(img[i], true);
-                else
                     this.Item(newindex).SetImage(img[i]);
+                else
+                    this.Item(newindex).SetImage(img[i], true);
+            }
+        }
+        // <Important>
+        // Displays an ItemList using the names of the items, on the given array of labels.
+        // Currently should be used for size and options (until we get images for those).
+        public void DisplayAsText(Label[] labels)
+        {
+            for (int i = 0; i < labels.Count(); i++) 
+            {
+                int newindex = i - labels.Count() / 2 + selected;
+                this.Item(newindex).SetLabel(labels[i]);
             }
         }
         //// SINGLE SELECTION
@@ -270,9 +285,9 @@ namespace InteractivePrototype
         {
             return foods;
         }
-        public Item Food() // Returns the selected Food.
+        public Food Food() // Returns the selected Food.
         {
-            return foods.ReturnSingle();
+            return (Food)foods.ReturnSingle();
         }
         public string FoodName() // Returns the name of the selected Food.
         {
@@ -340,6 +355,10 @@ namespace InteractivePrototype
         {
             Sizes().Display(img, displaytype);
         }
+        public void DisplaySizes(Label[] labels)
+        {
+            Sizes().DisplayAsText(labels);
+        }
         public void DisplayAmounts(Image[] img, int displaytype = 0)
         {
             Amounts().Display(img, displaytype);
@@ -347,6 +366,10 @@ namespace InteractivePrototype
         public void DisplayOptions(Image[] img, int displaytype = 0)
         {
             Options().Display(img, displaytype);
+        }
+        public void DisplayOptions(Label[] labels)
+        {
+            Options().DisplayAsText(labels);
         }
 
         // Accessor Functions
