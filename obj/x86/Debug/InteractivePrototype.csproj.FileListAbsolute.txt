@@ -38,3 +38,5 @@ C:\Users\Paige\Documents\Visual Studio 2010\Projects\InteractivePrototype\WpfApp
 C:\Users\Paige\Documents\Visual Studio 2010\Projects\InteractivePrototype\WpfApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Ashley Hsu\Documents\test\swipenserve\obj\x86\Debug\WpfApplication1.exe
 C:\Users\Ashley Hsu\Documents\test\swipenserve\obj\x86\Debug\WpfApplication1.pdb
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.exe
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.pdb
