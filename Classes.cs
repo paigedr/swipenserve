@@ -75,7 +75,7 @@ namespace Controls
     public class ItemList
     {
         protected List<Item> items; // Contains the items.
-        protected int selected = 1; // The index of the currently selected item.
+        protected int selected = 0; // The index of the currently selected item.
         public Boolean[] multiselected; // A boolean array where corresponding t/f values determine if an item is multi-selected. (all false by default)
         private Item nullitem = new Item("", ""); // Creates a null item. Set the image path to that of a blank image!
 
@@ -116,7 +116,7 @@ namespace Controls
         {
             for (int i = 0; i < img.Count(); i++)
             {
-                int newindex = i - img.Count() / 2 + selected; // basically, center the first Item on middle Image
+                int newindex = i + selected; // basically, center the first Item on middle Image
                 if (displaytype == 0)
                     this.Item(newindex).SetImage(img[i], (newindex == selected) || MultiSelected(newindex));
                 else if (displaytype == -1)
@@ -132,7 +132,7 @@ namespace Controls
         {
             for (int i = 0; i < labels.Count(); i++) 
             {
-                int newindex = i - labels.Count() / 2 + selected;
+                int newindex = i + selected;
                 this.Item(newindex).SetLabel(labels[i]);
             }
         }
@@ -162,7 +162,14 @@ namespace Controls
         // Returns the currently selected item.
         public Item ReturnSingle()
         {
-            return items[selected];
+            if (selected < items.Count())
+            {
+                return items[selected];
+            }
+            else
+            {
+                return null;
+            }
         }
         //// MULTIPLE SELECTION
         // Toggles the multi-selection status of the ith item.
@@ -363,6 +370,10 @@ namespace Controls
         {
             Amounts().Display(img, displaytype);
         }
+        public void DisplayAmounts(Label[] labels)
+        {
+            Amounts().DisplayAsText(labels);
+        }
         public void DisplayOptions(Image[] img, int displaytype = 0)
         {
             Options().Display(img, displaytype);
@@ -375,7 +386,25 @@ namespace Controls
         // Accessor Functions
         public double TotalPrice()
         {
-            return (price + sizes.ReturnSingle().Price() + Options(true).TotalPrice())*Amount();
+            double amount = 1;
+            double sizePrice = 0;
+            double optionsPrice = 0;
+            if (sizes != null)
+            {
+                sizePrice = sizes.ReturnSingle().Price();
+            }
+            if (options != null)
+            {
+                if (Option() != null)
+                {
+                    optionsPrice = Option().Price();
+                }
+            }
+            if (Amounts() != null)
+            {
+                amount = Amount();
+            }
+            return (price + sizePrice + optionsPrice) * amount;
         }
         public ItemList Sizes()
         {
@@ -391,6 +420,10 @@ namespace Controls
                 return options.ReturnMultiple();
             else
                 return options;
+        }
+        public Item Option()
+        {
+            return options.ReturnSingle();
         }
         public string SizeName() // Returns the name of the selected Size.
         {

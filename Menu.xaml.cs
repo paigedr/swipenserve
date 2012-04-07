@@ -55,16 +55,18 @@ namespace Controls
         Food burger, chicksandwich, bigsalad, fries, sidesalad, fruit, soda, boba, water;
         ItemList menu;
         Category meals, sides, drinks;
-        Image[] catCol, itemCol, amountCol;
-        Label[] sizeCol, optionsCol;
+        Image[] catCol, itemCol;
+        Label[] sizeCol, optionsCol, amountCol;
         int currentCol;
+        SolidColorBrush selectedBackground = new SolidColorBrush(Colors.Cornsilk);
+        SolidColorBrush defaultBackground = new SolidColorBrush(Colors.White);
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             // Amounts
-            Item one = new Item("One", "Images/number1.jpg");
-            Item two = new Item("Two", "Images/number2.jpg");
-            Item three = new Item("Three", "Images/number3.jpg");
+            Item one = new Item("1", "Images/number1.jpg", 1.0);
+            Item two = new Item("2", "Images/number2.jpg", 2.0);
+            Item three = new Item("3", "Images/number3.jpg", 3.0);
             ItemList allAmounts = new ItemList(new Item[] { one, two, three });
             // Food Sizes
             Item burgerRegSize = new Item("Regular", null, 4.0);
@@ -81,6 +83,7 @@ namespace Controls
             Item bobaMedSize = new Item("Medium", null, 2.5);
             Item bobaLargeSize = new Item("Large", null, 3.0);
             // Food Options
+            Item noneOption = new Item("None", null, 0.0);
             Item cheeseOption = new Item("Cheese", null, 1.0);
             Item picklesOption = new Item("Pickles", null, 0.0);
             Item onionsOption = new Item("Onions", null, 0.0);
@@ -94,15 +97,15 @@ namespace Controls
             // Foods
             // Meals
             ItemList burgerSizes = new ItemList(new Item[] { burgerRegSize, burgerJumboSize });
-            ItemList burgerOptions = new ItemList(new Item[] { cheeseOption, picklesOption, onionsOption });
+            ItemList burgerOptions = new ItemList(new Item[] { noneOption, cheeseOption, picklesOption, onionsOption });
             burger = new Food("Hamburger", "Images/hamburger.jpg", burgerSizes, allAmounts, burgerOptions); //base price needed?
             ItemList sandwichSizes = new ItemList(new Item[] { sandwichRegSize, sandwichJumboSize });
             chicksandwich = new Food("Chicken Sandwich", "Images/chicken_sandwich.jpg", sandwichSizes, allAmounts, burgerOptions);
-            ItemList saladOptions = new ItemList(new Item[] { cheeseOption, italianOption, ranchOption });
+            ItemList saladOptions = new ItemList(new Item[] { noneOption, cheeseOption, italianOption, ranchOption });
             bigsalad = new Food("Big Salad", "Images/big_salad.jpg", null, allAmounts, saladOptions, 5.0);
             // Sides
             ItemList friesSizes = new ItemList(new Item[] { friesSmallSize, friesMedSize, friesLargeSize });
-            ItemList friesOptions = new ItemList(new Item[] { chiliCheeseOption });
+            ItemList friesOptions = new ItemList(new Item[] { noneOption, chiliCheeseOption });
             fries = new Food("French Fries", "Images/french_fries.png", friesSizes, allAmounts, friesOptions);
             sidesalad = new Food("Side Salad", "Images/side_salad.png", null, allAmounts, saladOptions, 2.5);
             fruit = new Food("Fruit Salad", "Images/fruit_cup.png", null, allAmounts, null, 3.0);
@@ -111,7 +114,7 @@ namespace Controls
             ItemList sodaOptions = new ItemList(new Item[] { cokeOption, pepsiOption, spriteOption });
             soda = new Food("Soft Drink", "Images/soda.jpg", sodaSizes, allAmounts, sodaOptions);
             ItemList bobaSizes = new ItemList(new Item[] { bobaSmallSize, bobaMedSize, bobaLargeSize });
-            ItemList bobaOptions = new ItemList(new Item[] { bobaOption });
+            ItemList bobaOptions = new ItemList(new Item[] { noneOption, bobaOption });
             boba = new Food("Boba Tea", "Images/boba.bmp", bobaSizes, allAmounts, bobaOptions);
             water = new Food("Water", "Images/water.jpg", null, allAmounts, null);
             // Categories
@@ -124,18 +127,28 @@ namespace Controls
 
             // Set up the stackpanel rows
             catCol = new Image[] { cat1, cat2, cat3 };
-            amountCol = new Image[] {amount1, amount2, amount3};
+            amountCol = new Label[] {amount1, amount2, amount3};
             itemCol = new Image[] {item1, item2, item3};
             sizeCol = new Label[] {size1, size2, size3};
             optionsCol = new Label[] {option1, option2, option3};
 
             // Display logic
+            Category.Background = selectedBackground;
             menu.Display(catCol); // display categories in first row
             Category selectedCategory = (Category)menu.ReturnSingle();
             selectedCategory.DisplayFoods(itemCol); // display selected category's food in item row
-            currentName.Content = menu.ReturnSingle().Name(); // display name of category
         }
 
+        private void updatePrice()
+        {
+            Category category = (Category)menu.ReturnSingle();
+            Food food = category.Food();
+            if (food == null || food.TotalPrice() == 0)
+            {
+                currentPrice.Content = "";
+            }
+            else { currentPrice.Content = food.TotalPrice(); }
+        }
         private void up_Click(object sender, RoutedEventArgs e)
         {
             switch (currentCol)
@@ -146,6 +159,7 @@ namespace Controls
                 case AMOUNT: updownAmount(true); break;
                 case OPTIONS: updownOptions(true); break;
             }
+            if (currentCol != CATEGORY) { updatePrice(); }
         }
 
         private void down_Click(object sender, RoutedEventArgs e)
@@ -158,6 +172,7 @@ namespace Controls
                 case AMOUNT: updownAmount(false); break;
                 case OPTIONS: updownOptions(false); break;
             }
+            if (currentCol != CATEGORY) { updatePrice(); }
         }
 
         private void updownCategory(bool up)
@@ -167,7 +182,6 @@ namespace Controls
             menu.Display(catCol); // display categories in first row
             Category category = ((Category)menu.ReturnSingle()); // get selected category
             category.DisplayFoods(itemCol); // display category's foods in second row
-            currentName.Content = category.Name(); // display name of category's selected food
         }
 
         private void updownItem(bool up)
@@ -178,11 +192,13 @@ namespace Controls
             category.DisplayFoods(itemCol); // display foods in second row
             if (category.Food().Sizes() != null)
             {
+                clearAmountCol();
                 category.Food().DisplaySizes(sizeCol);
             }
             else
             {
                 clearSizeCol();
+                category.Food().DisplayAmounts(amountCol);
             }
             currentName.Content = category.FoodName(); // display name of food
             current.Source = new BitmapImage(new Uri(category.Food().Image(), UriKind.Relative));
@@ -194,6 +210,8 @@ namespace Controls
             Food food = category.Food();
             if (up) { food.SizeUp(); }
             else { food.SizeDown(); }
+            // refresh display
+            food.DisplaySizes(sizeCol);
             if (food.Amounts() != null)
             {
                 food.DisplayAmounts(amountCol);
@@ -207,6 +225,8 @@ namespace Controls
             Food food = category.Food();
             if (up) { food.AmountUp(); }
             else { food.AmountDown(); }
+            // refresh display
+            food.DisplayAmounts(amountCol);
             if (food.Options() != null)
             {
                 food.DisplayOptions(optionsCol);
@@ -221,6 +241,8 @@ namespace Controls
             Food food = category.Food();
             if (up) { food.OptionUp(); }
             else { food.OptionDown(); }
+            // refresh display
+            food.DisplayOptions(optionsCol);
             // update current
         }
 
@@ -233,7 +255,15 @@ namespace Controls
         }
         private void clearOptionsCol()
         {
-            foreach (Label l in sizeCol)
+            foreach (Label l in optionsCol)
+            {
+                l.Content = "";
+            }
+        }
+
+        private void clearAmountCol()
+        {
+            foreach (Label l in amountCol)
             {
                 l.Content = "";
             }
@@ -241,15 +271,111 @@ namespace Controls
 
         private void left_Click(object sender, RoutedEventArgs e)
         {
-            if (currentCol == CATEGORY) { return; }
-            currentCol = 0; // current menu = categories
-            currentName.Content = ((Category)menu.ReturnSingle()).Name(); // display name of category
+            switch (currentCol)
+            {
+                case CATEGORY: break;
+                case ITEM: selectCatCol(false); break;
+                case SIZE: selectItemCol(false); break;
+                case AMOUNT: selectSizeCol(false); break;
+                case OPTIONS: selectAmountCol(false); break;
+            }
+            if (currentCol != CATEGORY) { updatePrice(); }
         }
 
         private void right_Click(object sender, RoutedEventArgs e)
         {
-            currentCol = 1; // current menu = foods
-            currentName.Content = ((Category)menu.ReturnSingle()).FoodName(); // display name of category's selected food
+             switch (currentCol) {
+                 case CATEGORY: selectItemCol(true); break;
+                 case ITEM: selectSizeCol(true); break;
+                 case SIZE: selectAmountCol(true); break;
+                 case AMOUNT: selectOptionsCol(true); break;
+                 case OPTIONS: break;
+            }
+             if (currentCol != CATEGORY) { updatePrice();  }
+        }
+
+        private void selectCatCol(bool fromLeft)
+        {
+            clearSizeCol();
+            clearAmountCol();
+            Category.Background = selectedBackground;
+            Item.Background = defaultBackground;
+            currentCol = CATEGORY;
+            Category category = ((Category)menu.ReturnSingle());
+            currentName.Content = "";
+            current.Source = new BitmapImage(new Uri("", UriKind.Relative)); //blank image?
+            currentPrice.Content = ""; // don't show price in this column.
+        }
+
+        private void selectItemCol(bool fromLeft)
+        {
+            clearAmountCol();
+            clearOptionsCol();
+            Item.Background = selectedBackground;
+            if (fromLeft) { Category.Background = defaultBackground; }
+            else { Size.Background = defaultBackground; }
+            currentCol = ITEM;
+            Category category = ((Category)menu.ReturnSingle());
+            if (category.Food().Sizes() != null)
+            {
+                category.Food().DisplaySizes(sizeCol);
+            }
+            else
+            {
+                // if there are no sizes, display the next column (amounts)
+                category.Food().DisplayAmounts(amountCol);
+            }
+            currentName.Content = category.FoodName(); // display name of category's selected food
+            current.Source = new BitmapImage(new Uri(category.Food().Image(), UriKind.Relative));
+        }
+
+        private void selectSizeCol(bool fromLeft)
+        {
+            clearOptionsCol();
+            clearAmountCol();
+            Size.Background = selectedBackground;
+            if (fromLeft) { Item.Background = defaultBackground; }
+            else { Amount.Background = defaultBackground; }
+            currentCol = SIZE;
+            Category category = ((Category)menu.ReturnSingle());
+            Food food = category.Food();
+            if (food.Amounts() != null)
+            {
+                food.DisplayAmounts(amountCol);
+            }
+            if (food.Sizes() == null) 
+            { 
+                if (fromLeft) { selectAmountCol(true); }
+                else { selectItemCol(false); }
+            }
+            // update current
+        }
+
+        private void selectAmountCol(bool fromLeft)
+        {
+            clearOptionsCol();
+            Amount.Background = selectedBackground;
+            if (fromLeft) { Size.Background = defaultBackground; }
+            else { Options.Background = defaultBackground; }
+            currentCol = AMOUNT;
+            Category category = ((Category)menu.ReturnSingle());
+            Food food = category.Food();
+            if (food.Options() != null)
+            {
+                food.DisplayOptions(optionsCol);
+            }
+            //update current
+        }
+
+        private void selectOptionsCol(bool fromLeft)
+        {
+            Options.Background = selectedBackground;
+            Amount.Background = defaultBackground;
+            currentCol = OPTIONS;
+            Category category = ((Category)menu.ReturnSingle());
+            Food food = category.Food();
+            if (food.Options() == null) { selectAmountCol(false); }
+            // update current
         }
     }
 }
