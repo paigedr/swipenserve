@@ -4,7 +4,12 @@
         xmlns:Controls="clr-namespace:Controls"
         Title="MainWindow" Height="530" Width="660">
     <Grid>
-        <Controls:Intro Loaded="Intro_Loaded"></Controls:Intro>
-        <Controls:Menu></Controls:Menu>
+        <Canvas Name="intro">
+            <Button Name="swipeComplete" Height="50" Width="120" Content="Swipe Complete" Canvas.Left="483" Canvas.Top="201" Click="swipeComplete_Click"></Button>
+            <Controls:Intro Loaded="Intro_Loaded"></Controls:Intro>
+        </Canvas>
+        <Canvas Name="menu" Visibility="Hidden">
+            <Controls:Menu></Controls:Menu>
+        </Canvas>
     </Grid>
 </Window>

@@ -31,6 +31,12 @@ namespace InteractivePrototype
 
         private void swipeComplete_Click(object sender, RoutedEventArgs e)
         {
+            intro.Visibility = System.Windows.Visibility.Hidden;
+            menu.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void Menu_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
