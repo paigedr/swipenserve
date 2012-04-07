@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 
 namespace Controls
 {
@@ -24,6 +25,7 @@ namespace Controls
         public const int SIZE = 2;
         public const int AMOUNT = 3;
         public const int OPTIONS = 4;
+        public const int ORDER = 5;
 
         public Menu()
         {
@@ -54,12 +56,17 @@ namespace Controls
 
         Food burger, chicksandwich, bigsalad, fries, sidesalad, fruit, soda, boba, water;
         ItemList menu;
+        ItemList order;
         Category meals, sides, drinks;
         Image[] catCol, itemCol;
         Label[] sizeCol, optionsCol, amountCol;
         int currentCol;
         SolidColorBrush selectedBackground = new SolidColorBrush(Colors.Cornsilk);
         SolidColorBrush defaultBackground = new SolidColorBrush(Colors.White);
+        int orderRowIndex; //kind of a hacky way to keep track of where we are in the order column
+        bool editing;
+        String editString = "<-- Edit  ";
+        String deleteString = "  --> Delete";
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -124,6 +131,8 @@ namespace Controls
 
             // The top menu containing the food categories.
             menu = new ItemList(new Item[] { meals, sides, drinks });
+            // The list containing items in the order
+            order = new ItemList();
 
             // Set up the stackpanel rows
             catCol = new Image[] { cat1, cat2, cat3 };
@@ -133,10 +142,12 @@ namespace Controls
             optionsCol = new Label[] {option1, option2, option3};
 
             // Display logic
+            editing = false;
             Category.Background = selectedBackground;
             menu.Display(catCol); // display categories in first row
             Category selectedCategory = (Category)menu.ReturnSingle();
             selectedCategory.DisplayFoods(itemCol); // display selected category's food in item row
+            hideOrderOptions();
         }
 
         private void updatePrice()
@@ -147,8 +158,10 @@ namespace Controls
             {
                 currentPrice.Content = "";
             }
-            else { currentPrice.Content = food.TotalPrice(); }
+            else { currentPrice.Content = "$" + food.TotalPrice().ToString("N2"); }
         }
+
+        // EVENT HANDLERS
         private void up_Click(object sender, RoutedEventArgs e)
         {
             switch (currentCol)
@@ -158,6 +171,7 @@ namespace Controls
                 case SIZE: updownSize(true); break;
                 case AMOUNT: updownAmount(true); break;
                 case OPTIONS: updownOptions(true); break;
+                case ORDER: updownOrderCol(true); break;
             }
             if (currentCol != CATEGORY) { updatePrice(); }
         }
@@ -171,8 +185,88 @@ namespace Controls
                 case SIZE: updownSize(false); break;
                 case AMOUNT: updownAmount(false); break;
                 case OPTIONS: updownOptions(false); break;
+                case ORDER: updownOrderCol(false); break;
             }
             if (currentCol != CATEGORY) { updatePrice(); }
+        }
+
+
+        private void left_Click(object sender, RoutedEventArgs e)
+        {
+            switch (currentCol)
+            {
+                case CATEGORY: break;
+                case ITEM: selectCatCol(false); break;
+                case SIZE: selectItemCol(false); break;
+                case AMOUNT: selectSizeCol(false); break;
+                case OPTIONS: selectAmountCol(false); break;
+                case ORDER: handleOrderLeftClick(); break;
+            }
+            if (currentCol != CATEGORY) { updatePrice(); }
+        }
+
+        private void right_Click(object sender, RoutedEventArgs e)
+        {
+            switch (currentCol)
+            {
+                case CATEGORY: selectItemCol(true); break;
+                case ITEM: selectSizeCol(true); break;
+                case SIZE: selectAmountCol(true); break;
+                case AMOUNT: selectOptionsCol(true); break;
+                case OPTIONS: addToOrder(); selectOrderCol(); break;
+                case ORDER: handleOrderRightClick(); break;
+            }
+            if (currentCol != CATEGORY) { updatePrice(); }
+        }
+
+        // Helper event handlers
+
+        private void handleOrderRightClick()
+        {
+            Label l = (Label)Order.Children[orderRowIndex];
+            if (l == newItemLabel)
+            {
+                // go back to start
+                selectCatCol(false);
+            }
+            else if (l == checkOutLabel)
+            {
+                // exit menu screen, show checkout
+                main.Visibility = System.Windows.Visibility.Hidden;
+                Canvas parent = (Canvas)this.Parent;
+                Label label1 = new Label();
+                label1.Content = "Thanks for using Swipe n' Serve!\nYour order is waiting at the pick-up window.\nSee you again soon!";
+                label1.FontSize = 25;
+                parent.Children.Add(label1);
+                parent.Children[0].Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                // delete item
+                order.Delete(order.Item(order.SelectedIndex()));
+                Order.Children.RemoveAt(orderRowIndex);
+                orderRowIndex--;
+                order.Up();
+                showSelectedOrderItem();
+                updateTotalPrice();
+                if (order.Count() == 0)
+                {
+                    // don't allow user to check out
+                    Order.Children.Remove(checkOutLabel);
+                }
+            }
+        }
+
+        private void handleOrderLeftClick()
+        {
+            Label l = (Label)Order.Children[orderRowIndex];
+            if (l.Tag != null && l.Tag == "Item")
+            {
+                l.Content = l.Content.ToString() + " EDITING";
+                l.Background = new SolidColorBrush(Colors.LightPink);
+                editing = true;
+                selectOptionsCol(false);
+            }
         }
 
         private void updownCategory(bool up)
@@ -246,6 +340,18 @@ namespace Controls
             // update current
         }
 
+        private void updownOrderCol(bool up)
+        {
+            clearOrderSelections();
+            if (orderRowIndex > 1 && orderRowIndex < order.Count())
+            {
+                if (up) { order.Up(); }
+                else { order.Down(); }
+            }
+            if (up) { orderRowIndex--; if (orderRowIndex < 0) orderRowIndex = 0; }
+            else { orderRowIndex++; if (orderRowIndex > order.Count() + 2) orderRowIndex--; }
+            showSelectedOrderItem();
+        }
         private void clearSizeCol()
         {
             foreach (Label l in sizeCol)
@@ -269,35 +375,43 @@ namespace Controls
             }
         }
 
-        private void left_Click(object sender, RoutedEventArgs e)
+        private void hideOrderOptions()
         {
-            switch (currentCol)
-            {
-                case CATEGORY: break;
-                case ITEM: selectCatCol(false); break;
-                case SIZE: selectItemCol(false); break;
-                case AMOUNT: selectSizeCol(false); break;
-                case OPTIONS: selectAmountCol(false); break;
-            }
-            if (currentCol != CATEGORY) { updatePrice(); }
+            Order.Children.Remove(newItemLabel);
+            Order.Children.Remove(checkOutLabel);
         }
 
-        private void right_Click(object sender, RoutedEventArgs e)
+        private void unhideOrderOptions()
         {
-             switch (currentCol) {
-                 case CATEGORY: selectItemCol(true); break;
-                 case ITEM: selectSizeCol(true); break;
-                 case SIZE: selectAmountCol(true); break;
-                 case AMOUNT: selectOptionsCol(true); break;
-                 case OPTIONS: break;
-            }
-             if (currentCol != CATEGORY) { updatePrice();  }
+            Order.Children.Insert(1, newItemLabel);
+            Order.Children.Insert(2 + order.Count(), checkOutLabel);
         }
 
+        private void clearOrderSelections()
+        {
+            foreach (UIElement e in Order.Children) {
+                Label l = (Label)e;
+                if (l.Tag != null && l.Tag.Equals("Item"))
+                {
+                    if (!editing)
+                    {
+                        l.Background = defaultBackground;
+                    }
+                }
+                else if (l.Tag != null && l.Tag.Equals("Option"))
+                {
+                    l.Background = new SolidColorBrush(Colors.LightGreen);
+                    l.Foreground = new SolidColorBrush(Colors.Black);
+                }
+            }
+        }
         private void selectCatCol(bool fromLeft)
         {
             clearSizeCol();
             clearAmountCol();
+            clearOptionsCol();
+            clearOrderSelections();
+            hideOrderOptions();
             Category.Background = selectedBackground;
             Item.Background = defaultBackground;
             currentCol = CATEGORY;
@@ -369,6 +483,8 @@ namespace Controls
 
         private void selectOptionsCol(bool fromLeft)
         {
+            hideOrderOptions();
+            clearOrderSelections();
             Options.Background = selectedBackground;
             Amount.Background = defaultBackground;
             currentCol = OPTIONS;
@@ -376,6 +492,92 @@ namespace Controls
             Food food = category.Food();
             if (food.Options() == null) { selectAmountCol(false); }
             // update current
+        }
+
+        private void selectOrderCol()
+        {
+            editing = false;
+            unhideOrderOptions();
+            currentCol = ORDER;
+            orderRowIndex = 1;
+            clearOrderSelections();
+            Options.Background = defaultBackground;
+            showSelectedOrderItem();
+        }
+        // Order-related methods
+
+        private void showSelectedOrderItem()
+        {
+            Label selectedItem = (Label)Order.Children[orderRowIndex];
+            if (selectedItem.Tag != null && selectedItem.Tag == "Item")
+            {
+                selectedItem.Background = selectedBackground;
+            }
+            else
+            {
+                selectedItem.Background = new SolidColorBrush(Colors.Green);
+                selectedItem.Foreground = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        private void addNewItem()
+        {
+            selectCatCol(false);
+        }
+
+        private Food currentItem()
+        {
+            Category category = ((Category)menu.ReturnSingle());
+            Food food = category.Food();
+            ItemList itemSize = null;
+            ItemList itemOptions = null;
+            if (food.Sizes() != null) { 
+                itemSize = new ItemList(new Item[] { food.Sizes().ReturnSingle() });
+            }
+            ItemList itemAmount = new ItemList(new Item[] { food.Amounts().ReturnSingle() });
+            if (food.Options() != null) { itemOptions = new ItemList(new Item[] { food.Options().ReturnSingle() }); } //could be multiple in the future
+            return new Food(food.Name(), food.Image(), itemSize, itemAmount, itemOptions, food.TotalPrice());
+        }
+
+        private void addToOrder()
+        {
+            if (editing)
+            {
+                Order.Children.Remove(Order.Children[orderRowIndex-1]);
+                order.Delete(order.Item(order.SelectedIndex()));
+            }
+            order.Add(currentItem());
+            String s = formatOrderItem((Food)order.Item(order.Count() - 1));
+            Label l = new Label();
+            l.Content = s;
+            l.Tag = "Item";
+            Order.Children.Insert(1, l);
+            Order.UpdateLayout();
+            updateTotalPrice();
+        }
+
+        private void updateTotalPrice()
+        {
+            totalPrice.Content = "$" + order.TotalPrice().ToString("N2");
+        }
+
+        private String formatOrderItem(Food item)
+        {
+            String amount = item.Amounts().ReturnSingle().Name();
+            String name = item.Name();
+            if (item.Amounts().ReturnSingle().Price() > 1) {
+                name += "s"; //plural
+            }
+            String option = item.Options().ReturnSingle().Name();
+            String size = item.Sizes().ReturnSingle().Name();
+            String price = "$" + item.Price().ToString("N2");
+            if (option.ToLower().Equals("none"))
+            {
+                return amount + " " + size + " " + name + " " + ": " + price;
+            }
+            else {
+                return amount + " " + size + " " + name + " " + "with " + option + ": " + price;
+            }
         }
     }
 }

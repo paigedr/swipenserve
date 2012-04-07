@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded">
-    <Grid Height="480" Width="640">
+    <Grid Name="main" Height="480" Width="640">
         <Rectangle Height="80" StrokeThickness="3" Stroke="Purple" Margin="0,71,246,329" Panel.ZIndex="100"></Rectangle>
         <StackPanel Height="480" Width="80" Name="Category" Margin="1,0,559,0">
             <Label Content="Category" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
@@ -43,13 +43,13 @@
             <Label Name="currentName"></Label>
             <Label Name="currentPrice"></Label>
         </StackPanel>
-        <StackPanel Height="314" Width="250" Name="Order" Margin="392,0,0,166">
-            <Label Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
-            <Label Name="line1"></Label>
-            <Label Name="line2"></Label>
-            <Label Name="line3"></Label>
-            <Label Name="line4"></Label>
-            <Label Name="total" Background="Purple" Foreground="White" Content="Total" Margin="0,160,0,0"></Label>
+        <StackPanel Height="314" Width="250" x:Name="Order" Margin="392,0,0,166">
+            <Label Name="orderLabel" Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
+            <Label Name="newItemLabel" Tag="Option" Content="Add New Item   -->" Background="LightGreen" FontWeight="Bold"></Label>
+            <Label Name="checkOutLabel" Tag="Option" Content="Check Out          -->" Background="LightGreen" FontWeight="Bold"></Label>
+        </StackPanel>
+        <StackPanel Name="Total" Height="100" Width="250" Margin="392,45,0,0">
+            <Label Background="Purple" Foreground="White" Content="Total"></Label>
             <Label Name="totalPrice" Content="$0.00" FontWeight="Bold" FontSize="36"></Label>
         </StackPanel>
         <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click"></Button>

@@ -107,6 +107,11 @@ namespace Controls
             }
             multiselected = newms;
         }
+
+        public void Delete(Item i)
+        {
+            items.Remove(i);
+        }
         // <Important>
         // Displays an ItemList on the gives array of Images.
         // Centers first item on the middle Image, and displays nullitem's image for anything out of bounds.
@@ -135,6 +140,11 @@ namespace Controls
                 int newindex = i + selected;
                 this.Item(newindex).SetLabel(labels[i]);
             }
+        }
+
+        public int SelectedIndex()
+        {
+            return selected;
         }
         //// SINGLE SELECTION
         // <Important>
