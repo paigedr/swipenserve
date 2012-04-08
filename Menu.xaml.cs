@@ -569,7 +569,7 @@ namespace Controls
                 name += "s"; //plural
             }
             String option = item.Options().ReturnSingle().Name();
-            String size = item.Sizes().ReturnSingle().Name();
+            String size = item.SizeName();
             String price = "$" + item.Price().ToString("N2");
             if (option.ToLower().Equals("none"))
             {
