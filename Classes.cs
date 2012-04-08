@@ -36,6 +36,14 @@ namespace Controls
             else
                 this.altimagepath = a;
         }
+        // Clone Constructor
+        public Item(Item i)
+        {
+            this.name = i.name;
+            this.price = i.price;
+            this.imagepath = i.imagepath;
+            this.altimagepath = i.altimagepath;
+        }
 
         // <Important>
         // Sets the Source of the given Image object to this item's image path.
@@ -91,6 +99,13 @@ namespace Controls
         {
             items = new List<Item>(i);
             multiselected = new Boolean[i.Count()];
+        }
+        // Clone Constructor
+        public ItemList(ItemList i)
+        {
+            this.items = i.items;
+            this.selected = i.selected;
+            this.multiselected = i.multiselected;
         }
 
         //// GENERAL METHODS
@@ -280,6 +295,14 @@ namespace Controls
             else
                 this.altimagepath = a;
         }
+        // Clone Constructor
+        public Category(Category c)
+        {
+            this.name = c.name;
+            this.imagepath = c.imagepath;
+            this.foods = c.foods;
+            this.altimagepath = c.altimagepath;
+        }
 
         // Navigation Functions (For sub-lists)
         public void FoodUp()
@@ -335,6 +358,17 @@ namespace Controls
                 this.altimagepath = i;
             else
                 this.altimagepath = alt;
+        }
+        // Clone Constructor
+        public Food(Food f)
+        {
+            this.name = f.name;
+            this.price = f.price;
+            this.imagepath = f.imagepath;
+            this.sizes = f.sizes;
+            this.amounts = f.amounts;
+            this.options = f.options;
+            this.altimagepath = f.altimagepath;
         }
 
         // Navigation Functions (For sub-lists)
