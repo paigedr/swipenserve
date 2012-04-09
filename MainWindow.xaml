@@ -2,11 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:Controls"
+        Loaded="Menu_Loaded"
         Title="MainWindow" Height="530" Width="660" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers">
     <Grid>
         <Canvas Name="intro">
-            <Button Name="swipeComplete" Height="50" Width="120" Content="Swipe Complete" Canvas.Left="483" Canvas.Top="201" Click="swipeComplete_Click"></Button>
-            <Controls:Intro Loaded="Intro_Loaded"></Controls:Intro>
+            <Image Source="arrow_gradient_blue_right.png" Height="125" Panel.ZIndex="1" HorizontalAlignment="Left" Margin="99,334,0,0" Name="arrow" Stretch="Fill" VerticalAlignment="Top" Width="147" Canvas.Left="-60" Canvas.Top="0" />
+            <Button Name="swipeComplete" Height="50" Width="120" Content="Swipe Complete" Canvas.Left="483" Canvas.Top="201" Click="swipeComplete_Click" Visibility="Hidden"></Button>
+            <Controls:Intro></Controls:Intro>
+            <Rectangle Canvas.Left="500" Canvas.Top="345" Fill="Black" Height="100" Name="swipeBox" Width="100" Visibility="Hidden"/>
         </Canvas>
         <Canvas Name="menu" Visibility="Hidden">
             <Controls:Menu></Controls:Menu>

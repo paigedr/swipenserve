@@ -60,15 +60,15 @@
             <Label Name="orderLabel" Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
             <Label Name="newItemLabel" Tag="Option" Content="Add New Item   -->" Background="LightGreen" FontWeight="Bold"></Label>
             <Label Name="checkOutLabel" Tag="Option" Content="Check Out          -->" Background="LightGreen" FontWeight="Bold"></Label>
-            <TextBlock Name="test"></TextBlock>
+            
         </StackPanel>
         <StackPanel Name="Total" Height="100" Width="250" Margin="392,45,0,0">
             <Label Background="Purple" Foreground="White" Content="Total"></Label>
             <Label Name="totalPrice" Content="$0.00" FontWeight="Bold" FontSize="36"></Label>
         </StackPanel>
-        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click"></Button>
-        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click"></Button>
-        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click"></Button>
-        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click"></Button>
+        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click" Visibility="Hidden"></Button>
+        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click" Visibility="Hidden"></Button>
+        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click" Visibility="Hidden"></Button>
+        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click" Visibility="Hidden"></Button>
         </Grid>
 </UserControl>

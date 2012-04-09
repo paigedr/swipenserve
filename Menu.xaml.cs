@@ -124,28 +124,28 @@ namespace Controls
                 {
                     lastBox = leftBox;
                     lsCount++;
-                    test.Text = "Left Swipe " + lsCount.ToString();
+                    //test.Text = "Left Swipe " + lsCount.ToString();
                     left_Click(null, null);
                 }
                 if (currentBox == rightBox)
                 {
                     lastBox = rightBox;
                     rsCount++;
-                    test.Text = "Right Swipe " + rsCount.ToString();
+                    //test.Text = "Right Swipe " + rsCount.ToString();
                     right_Click(null, null);
                 }
                 if (currentBox == topBox)
                 {
                     lastBox = topBox;
                     usCount++;
-                    test.Text = "Up Swipe " + usCount.ToString();
+                    //test.Text = "Up Swipe " + usCount.ToString();
                     up_Click(null, null);
                 }
                 if (currentBox == bottomBox)
                 {
                     lastBox = bottomBox;
                     dsCount++;
-                    test.Text = "Down Swipe " + dsCount.ToString();
+                    //test.Text = "Down Swipe " + dsCount.ToString();
                     down_Click(null, null);
                 }
             }
@@ -159,11 +159,11 @@ namespace Controls
         {
             Point p = new Point(X,Y);
             if (check(centerBox, p)){
-                test.Text = "Center";
+                //test.Text = "Center";
                 return centerBox;}
             else if (check(topBox, p))
             {
-                test.Text = "Top";
+                //test.Text = "Top";
                 return topBox;
             }
             else if (check(bottomBox, p))
@@ -183,7 +183,7 @@ namespace Controls
             {
                 if (startingLeftHandX - first.Joints[JointType.HandLeft].Position.X > swipeDistance)
                 {
-                    test.Text = "swipe left";
+                    //test.Text = "swipe left";
                     left_Click(null, null);
 
                     makingLeftHandSwipe = false;
@@ -196,14 +196,14 @@ namespace Controls
             {
                 makingLeftHandSwipe = true;
                 startingLeftHandX = first.Joints[JointType.HandLeft].Position.X;
-                test.Text = "going left";
+                //test.Text = "going left";
             }
 
             else if (makingLeftHandSwipe && first.Joints[JointType.HandLeft].Position.X >= lastLeftHandX)
             {
                 if (first.Joints[JointType.HandLeft].Position.X - startingLeftHandX > swipeDistance)
                 {
-                    test.Text = "swipe right";
+                    //test.Text = "swipe right";
                     right_Click(null, null);
 
                     makingLeftHandSwipe = false;
@@ -216,14 +216,14 @@ namespace Controls
             {
                 makingLeftHandSwipe = true;
                 startingLeftHandX = first.Joints[JointType.HandLeft].Position.X;
-                test.Text = "going right";
+                //test.Text = "going right";
             }
 
             if (makingLeftHandSwipe && first.Joints[JointType.HandLeft].Position.Y <= lastLeftHandY)
             {
                 if (startingLeftHandY - first.Joints[JointType.HandLeft].Position.Y > swipeDistance)
                 {
-                    test.Text = "swipe down";
+                    //test.Text = "swipe down";
                     down_Click(null, null);
 
                     makingLeftHandSwipe = false;
@@ -236,14 +236,14 @@ namespace Controls
             {
                 makingLeftHandSwipe = true;
                 startingLeftHandY = first.Joints[JointType.HandLeft].Position.Y;
-                test.Text = "going down";
+                //test.Text = "going down";
             }
 
             else if (makingLeftHandSwipe && first.Joints[JointType.HandLeft].Position.Y >= lastLeftHandY)
             {
                 if (first.Joints[JointType.HandLeft].Position.Y - startingLeftHandY > swipeDistance)
                 {
-                    test.Text = "swipe up";
+                    //test.Text = "swipe up";
                     up_Click(null, null);    
 
                     makingLeftHandSwipe = false;
@@ -256,7 +256,7 @@ namespace Controls
             {
                 makingLeftHandSwipe = true;
                 startingLeftHandY = first.Joints[JointType.HandLeft].Position.Y;
-                test.Text = "going uppy";
+                //test.Text = "going uppy";
             }
             else if (makingLeftHandSwipe)
             {
@@ -426,6 +426,7 @@ namespace Controls
         Image[] catCol, itemCol;
         Label[] sizeCol, optionsCol, amountCol;
         int currentCol;
+        ImageBrush trashBackground = new ImageBrush();
         SolidColorBrush selectedBackground = new SolidColorBrush(Colors.Cornsilk);
         SolidColorBrush defaultBackground = new SolidColorBrush(Colors.White);
         int orderRowIndex; //kind of a hacky way to keep track of where we are in the order column
@@ -435,8 +436,11 @@ namespace Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            trashBackground = new ImageBrush();
+            trashBackground.ImageSource = new BitmapImage(new Uri("Images/trashbackground.png", UriKind.Relative));
+
             kinectSensorChooser1.KinectSensorChanged += new DependencyPropertyChangedEventHandler(kinectSensorChooser1_KinectSensorChanged);
-            test.Text = "CAKE";
+            //test.Text = "CAKE";
             SwipeTimer.Tick += new EventHandler(ResetSwipe);
             SwipeTimer.Interval = TimeSpan.FromSeconds(SwipeDelay);
 
@@ -761,6 +765,7 @@ namespace Controls
         {
             foreach (UIElement e in Order.Children) {
                 Label l = new Label() ;
+                TextBlock test = new TextBlock();
                 if (e.GetType() == test.GetType())
                 {
                     l.Content = ((TextBlock)e).Text;
@@ -898,18 +903,13 @@ namespace Controls
             }
             if (selectedItem.Tag != null && selectedItem.Tag == "Item")
             {
-                selectedItem.Background = selectedBackground;
+                selectedItem.Background = trashBackground;
             }
             else
             {
                 selectedItem.Background = new SolidColorBrush(Colors.Green);
                 selectedItem.Foreground = new SolidColorBrush(Colors.White);
             }
-
-            if (orderRowIndex > 1 && orderRowIndex < (order.Count() + 2))
-                test.Text = "Item Selected";
-            else
-                test.Text = orderRowIndex.ToString();
         }
 
         private void addNewItem()

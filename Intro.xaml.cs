@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Kinect;
+using Coding4Fun.Kinect.Wpf; 
 
 namespace Controls
 {
@@ -23,5 +25,7 @@ namespace Controls
         {
             InitializeComponent();
         }
+
+        
     }
 }
