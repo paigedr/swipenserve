@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded">
+             d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers">
     <Grid Name="main" Height="480" Width="640">
         <Rectangle Height="80" StrokeThickness="3" Stroke="Purple" Margin="0,71,246,329" Panel.ZIndex="100"></Rectangle>
         <StackPanel Height="480" Width="80" Name="Category" Margin="1,0,559,0">
@@ -30,6 +30,7 @@
             <Label Name="amount1" FontSize="20" Height="75" Margin="0,47,0,0"></Label>
             <Label Name="amount2" FontSize="20" Height="75"></Label>
             <Label Name="amount3" FontSize="20" Height="75"></Label>
+            <my:KinectSensorChooser Name="kinectSensorChooser1" Width="328" />
         </StackPanel>
         <StackPanel Height="480" Width="80" Name="Options" Margin="314,0,246,0">
             <Label Content="?" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
@@ -47,6 +48,7 @@
             <Label Name="orderLabel" Content="Your Order" Background="Purple" Foreground="White" Height="26" Width="250"></Label>
             <Label Name="newItemLabel" Tag="Option" Content="Add New Item   -->" Background="LightGreen" FontWeight="Bold"></Label>
             <Label Name="checkOutLabel" Tag="Option" Content="Check Out          -->" Background="LightGreen" FontWeight="Bold"></Label>
+            <TextBlock Name="test"></TextBlock>
         </StackPanel>
         <StackPanel Name="Total" Height="100" Width="250" Margin="392,45,0,0">
             <Label Background="Purple" Foreground="White" Content="Total"></Label>
@@ -56,5 +58,6 @@
         <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click"></Button>
         <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click"></Button>
         <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click"></Button>
+        
     </Grid>
 </UserControl>
