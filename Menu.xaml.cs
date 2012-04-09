@@ -674,7 +674,15 @@ namespace Controls
         private void clearOrderSelections()
         {
             foreach (UIElement e in Order.Children) {
-                Label l = (Label)e;
+                Label l = new Label() ;
+                if (e.GetType() == test.GetType())
+                {
+                    l.Content = ((TextBlock)e).Text;
+                }
+                else
+                {
+                    l = (Label)e;
+                }
                 if (l.Tag != null && l.Tag.Equals("Item"))
                 {
                     if (!editing)
