@@ -124,24 +124,19 @@
     <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\big_salad.png" />
+    <Resource Include="Images\boba.png" />
+    <Resource Include="Images\chicken_sandwich.png" />
     <Resource Include="Images\french_fries.png" />
-    <Resource Include="Images\number1.jpg" />
-    <Resource Include="Images\number2.jpg" />
-    <Resource Include="Images\number3.jpg" />
-    <Resource Include="Images\sandwich.jpg" />
-    <Resource Include="Images\soda.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\big_salad.jpg" />
-    <Resource Include="Images\boba.bmp" />
-    <Resource Include="Images\chicken_sandwich.jpg" />
     <Resource Include="Images\fruit_cup.png" />
-    <Resource Include="Images\hamburger.jpg" />
+    <Resource Include="Images\hamburger.png" />
+    <Resource Include="Images\sandwich.png" />
     <Resource Include="Images\side_salad.png" />
-    <Resource Include="Images\water.jpg" />
+    <Resource Include="Images\trashbackground.png" />
+    <Resource Include="Images\water.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\trashbackground.png" />
+    <Resource Include="Images\soda.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

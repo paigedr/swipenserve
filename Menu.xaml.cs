@@ -479,9 +479,9 @@ namespace Controls
             // Meals
             ItemList burgerSizes = new ItemList(new Item[] { burgerRegSize, burgerJumboSize });
             ItemList burgerOptions = new ItemList(new Item[] { noneOption, cheeseOption, picklesOption, onionsOption });
-            burger = new Food("Hamburger", "Images/hamburger.jpg", burgerSizes, allAmounts, burgerOptions); //base price needed?
+            burger = new Food("Hamburger", "Images/hamburger.png", burgerSizes, allAmounts, burgerOptions); //base price needed?
             ItemList sandwichSizes = new ItemList(new Item[] { sandwichRegSize, sandwichJumboSize });
-            chicksandwich = new Food("Chicken Sandwich", "Images/chicken_sandwich.jpg", sandwichSizes, allAmounts, burgerOptions);
+            chicksandwich = new Food("Chicken Sandwich", "Images/chicken_sandwich.png", sandwichSizes, allAmounts, burgerOptions);
             ItemList saladOptions = new ItemList(new Item[] { noneOption, cheeseOption, italianOption, ranchOption });
             bigsalad = new Food("Big Salad", "Images/big_salad.jpg", null, allAmounts, saladOptions, 5.0);
             // Sides
@@ -493,15 +493,15 @@ namespace Controls
             // Drinks
             ItemList sodaSizes = new ItemList(new Item[] { sodaSmallSize, sodaMedSize, sodaLargeSize });
             ItemList sodaOptions = new ItemList(new Item[] { cokeOption, pepsiOption, spriteOption });
-            soda = new Food("Soft Drink", "Images/soda.jpg", sodaSizes, allAmounts, sodaOptions);
+            soda = new Food("Soft Drink", "Images/soda.png", sodaSizes, allAmounts, sodaOptions);
             ItemList bobaSizes = new ItemList(new Item[] { bobaSmallSize, bobaMedSize, bobaLargeSize });
             ItemList bobaOptions = new ItemList(new Item[] { noneOption, bobaOption });
-            boba = new Food("Boba Tea", "Images/boba.bmp", bobaSizes, allAmounts, bobaOptions);
-            water = new Food("Water", "Images/water.jpg", null, allAmounts, null);
+            boba = new Food("Boba Tea", "Images/boba.png", bobaSizes, allAmounts, bobaOptions);
+            water = new Food("Water", "Images/water.png", null, allAmounts, null);
             // Categories
-            meals = new Category("Meals", "Images/sandwich.jpg", new ItemList(new Item[] {burger, chicksandwich, bigsalad}));
+            meals = new Category("Meals", "Images/sandwich.png", new ItemList(new Item[] {burger, chicksandwich, bigsalad}));
             sides = new Category("Sides", "Images/french_fries.png", new ItemList(new Item[] {fries, sidesalad, fruit}));
-            drinks = new Category("Drinks", "Images/soda.jpg", new ItemList(new Item[] {soda, boba, water}));
+            drinks = new Category("Drinks", "Images/soda.png", new ItemList(new Item[] {soda, boba, water}));
 
             // The top menu containing the food categories.
             menu = new ItemList(new Item[] { meals, sides, drinks });
