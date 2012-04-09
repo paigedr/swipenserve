@@ -36,6 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Kinect.Wpf">
+      <HintPath>..\..\Documents\CS 160\Dependencies\Coding4Fun.Kinect.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Samples.Kinect.WpfViewers">
+      <HintPath>..\..\Documents\CS 160\Dependencies\KinectWpfViewers\bin\Release\Microsoft.Samples.Kinect.WpfViewers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -49,6 +56,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfApplication3">
+      <HintPath>..\..\Documents\CS 160\jessica-chou-ipa2\WpfApplication3\WpfApplication3\bin\Debug\WpfApplication3.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -112,9 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Penguins.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\french_fries.png" />

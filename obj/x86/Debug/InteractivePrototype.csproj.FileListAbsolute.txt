@@ -40,3 +40,27 @@ C:\Users\Ashley Hsu\Documents\test\swipenserve\obj\x86\Debug\WpfApplication1.exe
 C:\Users\Ashley Hsu\Documents\test\swipenserve\obj\x86\Debug\WpfApplication1.pdb
 C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.exe
 C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.pdb
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\WpfApplication1.exe
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\WpfApplication1.pdb
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\Intro.baml
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\Menu.baml
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\Intro.g.cs
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\Menu.g.cs
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\App.g.cs
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1_MarkupCompile.cache
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1_MarkupCompile.lref
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\MainWindow.baml
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.g.resources
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Jessica\Desktop\swipenserve\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\Coding4Fun.Kinect.Wpf.dll
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\Microsoft.Samples.Kinect.WpfViewers.dll
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\WpfApplication3.exe
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\Coding4Fun.Kinect.Wpf.pdb
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\Microsoft.Samples.Kinect.WpfViewers.pdb
+C:\Users\Jessica\Desktop\swipenserve\bin\Debug\WpfApplication3.pdb
