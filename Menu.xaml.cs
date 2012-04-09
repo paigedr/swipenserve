@@ -31,6 +31,7 @@ namespace Controls
         public const int ORDER = 5;
         private const int SwipeDelay = 2;
         private const double swipeDistance = 0.3;
+        private Rectangle lastBox;
         public Boolean canswipe = true;
         private DispatcherTimer SwipeTimer = new DispatcherTimer();
 
@@ -102,27 +103,80 @@ namespace Controls
                 return;
             }
 
+            //ScalePosition(leftEllipse, first.Joints[JointType.HandLeft]);
+
             GetCameraPoint(first, e);
-            DetectGesture(first, e);
-            DetectLeftHandSwipe(first, e);
+            
+            //DetectLeftHandSwipe(first, e);
             
         }
 
-
-        void DetectGesture(Skeleton first, AllFramesReadyEventArgs e)
+        private int lsCount = 0;
+        private int rsCount = 0;
+        private int dsCount = 0;
+        private int usCount = 0;
+        public void BoxGesture(int X, int Y)
         {
-            Joint head = first.Joints[JointType.Head];
-            Joint leftHand = first.Joints[JointType.HandLeft];
-            Joint rightHand = first.Joints[JointType.HandRight];
-            if (leftHand.Position.Y > head.Position.Y)
+            Rectangle currentBox = GetBox(X, Y);
+            if (lastBox == centerBox)
             {
-                
-                    test.Text = "Hands are above Head!";
-                    
-                
+                if (currentBox == leftBox)
+                {
+                    lastBox = leftBox;
+                    lsCount++;
+                    test.Text = "Left Swipe " + lsCount.ToString();
+                    left_Click(null, null);
+                }
+                if (currentBox == rightBox)
+                {
+                    lastBox = rightBox;
+                    rsCount++;
+                    test.Text = "Right Swipe " + rsCount.ToString();
+                    right_Click(null, null);
+                }
+                if (currentBox == topBox)
+                {
+                    lastBox = topBox;
+                    usCount++;
+                    test.Text = "Up Swipe " + usCount.ToString();
+                    up_Click(null, null);
+                }
+                if (currentBox == bottomBox)
+                {
+                    lastBox = bottomBox;
+                    dsCount++;
+                    test.Text = "Down Swipe " + dsCount.ToString();
+                    down_Click(null, null);
+                }
+            }
+            else
+            {
+                lastBox = currentBox;
             }
         }
 
+        public Rectangle GetBox(int X, int Y)
+        {
+            Point p = new Point(X,Y);
+            if (check(centerBox, p)){
+                test.Text = "Center";
+                return centerBox;}
+            else if (check(topBox, p))
+            {
+                test.Text = "Top";
+                return topBox;
+            }
+            else if (check(bottomBox, p))
+                return bottomBox;
+            else if (check(leftBox, p))
+                return leftBox;
+            else if (check(rightBox, p))
+                return rightBox;
+            else
+                return null;
+        }
+
+       
         void DetectLeftHandSwipe(Skeleton first, AllFramesReadyEventArgs e)
         {
             if (makingLeftHandSwipe && first.Joints[JointType.HandLeft].Position.X <= lastLeftHandX)
@@ -236,6 +290,38 @@ namespace Controls
                     depth.MapFromSkeletonPoint(first.Joints[JointType.HandRight].Position);
                 DepthImagePoint headDepthPoint =
                     depth.MapFromSkeletonPoint(first.Joints[JointType.Head].Position);
+                DepthImagePoint shoulderDepthPoint = 
+                    depth.MapFromSkeletonPoint(first.Joints[JointType.ShoulderRight].Position);
+
+                //Map a depth point to a point on the color image
+                //left hand
+                ColorImagePoint leftColorPoint =
+                    depth.MapToColorImagePoint(leftDepthPoint.X, leftDepthPoint.Y,
+                    ColorImageFormat.RgbResolution640x480Fps30);
+                //right hand
+                ColorImagePoint rightColorPoint =
+                    depth.MapToColorImagePoint(rightDepthPoint.X, rightDepthPoint.Y,
+                    ColorImageFormat.RgbResolution640x480Fps30);
+                //right shoukder
+                ColorImagePoint shoulderColorPoint =
+                    depth.MapToColorImagePoint(shoulderDepthPoint.X, shoulderDepthPoint.Y,
+                    ColorImageFormat.RgbResolution640x480Fps30);
+
+
+                //Set location
+                double ccLeft = shoulderColorPoint.X - InnerCanvas.Width / 2;
+                double ccTop = shoulderColorPoint.Y - InnerCanvas.Height / 2;
+                Canvas.SetLeft(ControlCanvas, ccLeft);
+                Canvas.SetTop(ControlCanvas, ccTop);
+
+                double eLeft = leftColorPoint.X - leftEllipse.Width / 2 + ccLeft - 150;
+                double eTop = leftColorPoint.Y - leftEllipse.Height / 2 + ccTop - 150;
+                //test.Text = "(" + ccLeft.ToString() + ", " + ccTop.ToString() + ")" + "(" + eLeft.ToString() + ", " + eTop.ToString() + ")";
+                Canvas.SetLeft(leftEllipse, eLeft);
+                Canvas.SetTop(leftEllipse, eTop);
+                //CameraPosition(ControlCanvas, shoulderColorPoint);
+                //CameraPosition(rightEllipse, rightColorPoint);
+                BoxGesture(leftColorPoint.X, leftColorPoint.Y);
             }
         }
 
@@ -877,6 +963,20 @@ namespace Controls
         {
             canswipe = true;
             SwipeTimer.Stop();
+        }
+
+        private bool check(Rectangle element, Point point)
+        {
+                bool vert_in = (point.Y >= Canvas.GetTop(element) + Canvas.GetTop(ControlCanvas)) && (point.Y <= Canvas.GetTop(element) + Canvas.GetTop(ControlCanvas) + element.ActualHeight);
+                bool hori_in = (point.X >= Canvas.GetLeft(element) + Canvas.GetLeft(ControlCanvas)) && (point.X <= Canvas.GetLeft(element) + Canvas.GetLeft(ControlCanvas) + element.ActualWidth);
+                if (vert_in && hori_in)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
         }
     }
 }

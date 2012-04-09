@@ -6,6 +6,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers">
     <Grid Name="main" Height="480" Width="640">
+        <Canvas Name="OuterCanvas" Height="640" Width="480">
+            <ContentControl Name="ControlCanvas" Panel.ZIndex="1" Visibility="Hidden" >
+                <Canvas Name="InnerCanvas" Height="300" Width="300">
+                    <Rectangle Height="100" Width="100" Fill="Tan" Name="topBox" Canvas.Left="100" Canvas.Top="0"></Rectangle>
+                    <Rectangle Height="100" Width="100" Fill="Black" Name="bottomBox" Canvas.Left="100" Canvas.Top="200"></Rectangle>
+                    <Rectangle Height="100" Width="100" Fill="Cyan" Name="centerBox" Canvas.Left="100" Canvas.Top="100"></Rectangle>
+                    <Rectangle Height="100" Width="100" Fill="Lavender" Name="leftBox" Canvas.Left="0" Canvas.Top="100"></Rectangle>
+                    <Rectangle Height="100" Width="100" Fill="Red" Name="rightBox" Canvas.Left="200" Canvas.Top="100"></Rectangle>
+                    </Canvas>
+            </ContentControl>
+            <Ellipse Height="20" Panel.ZIndex="2" Visibility="Hidden" HorizontalAlignment="Left" Margin="0,0,0,0" Name="leftEllipse" Stroke="Black" VerticalAlignment="Top" Width="20" Fill="Blue" />
+        </Canvas>
         <Rectangle Height="80" StrokeThickness="3" Stroke="Purple" Margin="0,71,246,329" Panel.ZIndex="100"></Rectangle>
         <StackPanel Height="480" Width="80" Name="Category" Margin="1,0,559,0">
             <Label Content="Category" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
@@ -58,6 +70,5 @@
         <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click"></Button>
         <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click"></Button>
         <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click"></Button>
-        
-    </Grid>
+        </Grid>
 </UserControl>
