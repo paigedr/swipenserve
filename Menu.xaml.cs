@@ -887,7 +887,15 @@ namespace Controls
 
         private void showSelectedOrderItem()
         {
-            Label selectedItem = (Label)Order.Children[orderRowIndex];
+            Label selectedItem = new Label();
+            if (Order.Children[orderRowIndex].GetType() == selectedItem.GetType())
+            {
+                selectedItem = (Label)Order.Children[orderRowIndex];
+            }
+            else
+            {
+                selectedItem.Content = ((TextBox)Order.Children[orderRowIndex]).Text;
+            }
             if (selectedItem.Tag != null && selectedItem.Tag == "Item")
             {
                 selectedItem.Background = selectedBackground;
@@ -897,6 +905,11 @@ namespace Controls
                 selectedItem.Background = new SolidColorBrush(Colors.Green);
                 selectedItem.Foreground = new SolidColorBrush(Colors.White);
             }
+
+            if (orderRowIndex > 1 && orderRowIndex < (order.Count() + 2))
+                test.Text = "Item Selected";
+            else
+                test.Text = orderRowIndex.ToString();
         }
 
         private void addNewItem()
