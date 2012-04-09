@@ -437,15 +437,21 @@ namespace Controls
         }
         public string SizeName() // Returns the name of the selected Size.
         {
-            return sizes.ReturnSingle().Name();
+            if (sizes != null)
+                return sizes.ReturnSingle().Name();
+            return "";
         }
         public double Amount() // Returns the price (amount) of the selected Amount.
         {
-            return amounts.ReturnSingle().Price();
+            if (amounts != null)
+                return amounts.ReturnSingle().Price();
+            return 0;
         }
         public string[] OptionNames() // Returns the names of the selected Options.
         {
-            return Options().Names();
+            if (options != null)
+                return Options().Names();
+            return new String[0];
         }
     }
 }
