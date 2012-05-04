@@ -499,9 +499,9 @@ namespace Controls
             boba = new Food("Boba Tea", "Images/boba.png", bobaSizes, allAmounts, bobaOptions);
             water = new Food("Water", "Images/water.png", null, allAmounts, null);
             // Categories
-            meals = new Category("Meals", "Images/sandwich.png", new ItemList(new Item[] {burger, chicksandwich, bigsalad}));
-            sides = new Category("Sides", "Images/french_fries.png", new ItemList(new Item[] {fries, sidesalad, fruit}));
-            drinks = new Category("Drinks", "Images/soda.png", new ItemList(new Item[] {soda, boba, water}));
+            meals = new Category("Meals", "Images/meals.png", new ItemList(new Item[] {burger, chicksandwich, bigsalad}));
+            sides = new Category("Sides", "Images/sides.png", new ItemList(new Item[] {fries, sidesalad, fruit}));
+            drinks = new Category("Drinks", "Images/drinks.png", new ItemList(new Item[] {soda, boba, water}));
 
             // The top menu containing the food categories.
             menu = new ItemList(new Item[] { meals, sides, drinks });
