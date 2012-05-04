@@ -9,13 +9,13 @@
         
         <Rectangle Height="125" HorizontalAlignment="Left" Margin="95,333,0,0" Name="slider" Stroke="DarkBlue" Fill="LightGray" VerticalAlignment="Top" Width="564" Canvas.Left="-56" Canvas.Top="1" />
         <Label Content="Welcome to Pajama Foods!" FontSize="36" Height="65" HorizontalAlignment="Left" Margin="178,20,0,0" Name="label1" VerticalAlignment="Top" Width="444" Canvas.Left="-71" Canvas.Top="-8" />
-        <MediaElement  Panel.ZIndex="2" Height="165" HorizontalAlignment="Left" Margin="172,128,0,0" Name="introVideo" VerticalAlignment="Top" Width="259" Canvas.Left="18" Canvas.Top="23">
+        <MediaElement Panel.ZIndex="2" Height="165" HorizontalAlignment="Left" Margin="172,128,0,0" Name="introVideo" VerticalAlignment="Top" Width="259" Canvas.Left="18" Canvas.Top="23">
             <MediaElement.Triggers>
                 <EventTrigger RoutedEvent="MediaElement.Loaded">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <MediaTimeline Name="GRR" Source="C:\Users\Mac2492\Desktop\Angel Beats!\ffmpeg-git-01fcbdf-win64-static\bin\intro.m4v" Storyboard.TargetName="introVideo" RepeatBehavior="Forever" />
+                                <MediaTimeline Name="GRR" Source="Images\intro.m4v" Storyboard.TargetName="introVideo" RepeatBehavior="Forever" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
