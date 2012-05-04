@@ -25,7 +25,6 @@ namespace Controls
         {
             InitializeComponent();
         }
-
         
     }
 }

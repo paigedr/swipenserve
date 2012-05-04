@@ -9,9 +9,20 @@
         
         <Rectangle Height="125" HorizontalAlignment="Left" Margin="95,333,0,0" Name="slider" Stroke="DarkBlue" Fill="LightGray" VerticalAlignment="Top" Width="564" Canvas.Left="-56" Canvas.Top="1" />
         <Label Content="Welcome to Pajama Foods!" FontSize="36" Height="65" HorizontalAlignment="Left" Margin="178,20,0,0" Name="label1" VerticalAlignment="Top" Width="444" Canvas.Left="-71" Canvas.Top="-8" />
-        <MediaElement Height="165" HorizontalAlignment="Left" Margin="172,128,0,0" Name="introVideo" VerticalAlignment="Top" Width="259" Canvas.Left="18" Canvas.Top="13" />
+        <MediaElement Name="introVideo" Source="Images\intro.m4v" Panel.ZIndex="2" Height="165" Width="259" Margin="200,150,0,0">
+            <MediaElement.Triggers>
+                <EventTrigger RoutedEvent="MediaElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <MediaTimeline Name="GRR" Source="C:\Users\Mac2492\Documents\Visual Studio 2010\Projects\swipenserve\Images\intro.m4v" Storyboard.TargetName="introVideo" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </MediaElement.Triggers>
+        </MediaElement>
         <Label Content="To order with gestures, please swipe." Foreground="Gray" FontSize="24" Height="44" HorizontalAlignment="Left" Margin="103,68,0,0" Name="label2" VerticalAlignment="Top" Width="398" Canvas.Left="16" Canvas.Top="15" />
-        <Label Content="Swipe to order!" Height="64" FontSize="40" Canvas.Top="362" Width="295" Canvas.Left="256"></Label>
-        
+        <Label Content="Swipe with left hand to order!" Height="78" FontSize="40" Canvas.Top="360" Width="535" Canvas.Left="53"></Label>
     </Canvas>
 </UserControl>
