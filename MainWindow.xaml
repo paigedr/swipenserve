@@ -10,11 +10,12 @@
             <Button Name="swipeComplete" Height="50" Width="120" Content="Swipe Complete" Canvas.Left="483" Canvas.Top="201" Click="swipeComplete_Click" Visibility="Hidden"></Button>
             <Controls:Intro></Controls:Intro>
             <Rectangle Canvas.Left="500" Canvas.Top="345" Fill="Black" Height="100" Name="swipeBox" Width="100" Visibility="Hidden"/>
+            <Button Canvas.Left="18" Canvas.Top="74" Content="asfdscs" Height="19" Name="button2" Width="75"  Click="swipeComplete_Click" Panel.ZIndex="2"/>
+
         </Canvas>
         <Canvas Name="menu" Visibility="Hidden">
             <Controls:Menu></Controls:Menu>
             <my:KinectSensorChooser Canvas.Left="139" Canvas.Top="164" Name="kinectSensorChooser1" Width="328" />
-        </Canvas>
-        
+            </Canvas>
     </Grid>
 </Window>

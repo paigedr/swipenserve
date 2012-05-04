@@ -24,8 +24,8 @@ namespace Controls
         public Intro()
         {
             InitializeComponent();
+            GRR.Source = new Uri("Images/intro.m4v", UriKind.Relative);
         }
-
         
     }
 }

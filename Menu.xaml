@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="480" d:DesignWidth="640" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers">
+             mc:Ignorable="d" Loaded="UserControl_Loaded" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers" d:DesignHeight="480" d:DesignWidth="640">
     <Grid Name="main" Height="480" Width="640">
         <Canvas Name="OuterCanvas" Height="640" Width="480">
             <ContentControl Name="ControlCanvas" Panel.ZIndex="1" Visibility="Hidden" >
@@ -66,9 +65,22 @@
             <Label Background="Purple" Foreground="White" Content="Total"></Label>
             <Label Name="totalPrice" Content="$0.00" FontWeight="Bold" FontSize="36"></Label>
         </StackPanel>
-        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click" Visibility="Hidden"></Button>
-        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click" Visibility="Hidden"></Button>
-        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click" Visibility="Hidden"></Button>
-        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click" Visibility="Hidden"></Button>
-        </Grid>
+        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click" Visibility="Visible"></Button>
+        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click" Visibility="Visible"></Button>
+        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click" Visibility="Visible"></Button>
+        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click" Visibility="Visible"></Button>
+        <MediaElement Height="156" HorizontalAlignment="Left" Margin="81,312,0,0" Name="mediaElement1" VerticalAlignment="Top" Width="286" Source="menu.m4v">
+            <MediaElement.Triggers>
+                <EventTrigger RoutedEvent="MediaElement.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <MediaTimeline Source="C:\Users\Mac2492\Desktop\Angel Beats!\ffmpeg-git-01fcbdf-win64-static\bin\intro.m4v" Storyboard.TargetName="introVideo" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </MediaElement.Triggers>
+        </MediaElement>
+    </Grid>
 </UserControl>
