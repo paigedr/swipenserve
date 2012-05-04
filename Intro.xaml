@@ -11,7 +11,7 @@
         <Label Content="Welcome to Pajama Foods!" FontSize="36" Height="65" HorizontalAlignment="Left" Margin="178,20,0,0" Name="label1" VerticalAlignment="Top" Width="444" Canvas.Left="-71" Canvas.Top="-8" />
         <MediaElement Height="165" HorizontalAlignment="Left" Margin="172,128,0,0" Name="introVideo" VerticalAlignment="Top" Width="259" Canvas.Left="18" Canvas.Top="13" />
         <Label Content="To order with gestures, please swipe." Foreground="Gray" FontSize="24" Height="44" HorizontalAlignment="Left" Margin="103,68,0,0" Name="label2" VerticalAlignment="Top" Width="398" Canvas.Left="16" Canvas.Top="15" />
-        <Label Content="Swipe to order!" Height="64" FontSize="40" Canvas.Top="362" Width="295" Canvas.Left="256"></Label>
+        <Label Content="Swipe with left hand to order!" Height="78" FontSize="40" Canvas.Top="361" Width="535" Canvas.Left="53"></Label>
         
     </Canvas>
 </UserControl>

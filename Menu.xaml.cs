@@ -427,7 +427,7 @@ namespace Controls
         Label[] sizeCol, optionsCol, amountCol;
         int currentCol;
         ImageBrush trashBackground = new ImageBrush();
-        SolidColorBrush selectedBackground = new SolidColorBrush(Colors.Cornsilk);
+        SolidColorBrush selectedBackground = new SolidColorBrush(Colors.LightGreen);
         SolidColorBrush defaultBackground = new SolidColorBrush(Colors.White);
         int orderRowIndex; //kind of a hacky way to keep track of where we are in the order column
         bool editing;

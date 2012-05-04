@@ -45,7 +45,7 @@
             <my:KinectSensorChooser Name="kinectSensorChooser1" Width="328" />
         </StackPanel>
         <StackPanel Height="480" Width="80" Name="Options" Margin="314,0,246,0">
-            <Label Content="?" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
+            <Label Content="Options" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
             <Label Name="option1" Height="75" Margin="0,47,0,0"></Label>
             <Label Name="option2" Height="75"></Label>
             <Label Name="option3" Height="75"></Label>
