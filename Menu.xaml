@@ -41,7 +41,6 @@
             <Label Name="amount1" FontSize="20" Height="75" Margin="0,47,0,0"></Label>
             <Label Name="amount2" FontSize="20" Height="75"></Label>
             <Label Name="amount3" FontSize="20" Height="75"></Label>
-            <my:KinectSensorChooser Name="kinectSensorChooser1" Width="328" />
         </StackPanel>
         <StackPanel Height="480" Width="80" Name="Options" Margin="314,0,246,0">
             <Label Content="Options" Background="Purple" Foreground="White" Height="26" Width="80"></Label>
@@ -65,22 +64,23 @@
             <Label Background="Purple" Foreground="White" Content="Total"></Label>
             <Label Name="totalPrice" Content="$0.00" FontWeight="Bold" FontSize="36"></Label>
         </StackPanel>
-        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click" Visibility="Visible"></Button>
-        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click" Visibility="Visible"></Button>
-        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click" Visibility="Visible"></Button>
-        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click" Visibility="Visible"></Button>
-        <MediaElement Height="156" HorizontalAlignment="Left" Margin="81,312,0,0" Name="mediaElement1" VerticalAlignment="Top" Width="286" Source="menu.m4v">
+        <Button Name="up" Width="50" Height="30" Content="Up" Margin="528,338,62,112" Click="up_Click" Visibility="Visible" Opacity="0"></Button>
+        <Button Name="down" Width="50" Height="30" Content="Down" Margin="528,413,62,37" Click="down_Click" Visibility="Visible" Opacity="0"></Button>
+        <Button Name="left" Width="50" Height="30" Content="Left" Margin="482,373,108,77" Click="left_Click" Visibility="Visible" Opacity="0"></Button>
+        <Button Name="right" Width="50" Height="30" Content="Right" Margin="578,373,12,77" Click="right_Click" Visibility="Visible" Opacity="0"></Button>
+        <MediaElement Height="119" HorizontalAlignment="Left" Margin="81,360,0,0" Name="menuVideo" VerticalAlignment="Top" Width="235">
             <MediaElement.Triggers>
                 <EventTrigger RoutedEvent="MediaElement.Loaded">
                     <EventTrigger.Actions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <MediaTimeline Source="C:\Users\Mac2492\Desktop\Angel Beats!\ffmpeg-git-01fcbdf-win64-static\bin\intro.m4v" Storyboard.TargetName="introVideo" RepeatBehavior="Forever" />
+                                <MediaTimeline Source="C:\Users\Mac2492\Documents\Visual Studio 2010\Projects\swipenserve\Images\menu.m4v" Storyboard.TargetName="menuVideo" RepeatBehavior="Forever" />
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger.Actions>
                 </EventTrigger>
             </MediaElement.Triggers>
         </MediaElement>
+        <my:KinectSensorChooser Name="kinectSensorChooser1" Width="328" Margin="668,174,-356,125" />
     </Grid>
 </UserControl>

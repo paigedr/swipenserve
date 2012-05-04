@@ -6,16 +6,15 @@
         Title="MainWindow" Height="530" Width="660" xmlns:my="clr-namespace:Microsoft.Samples.Kinect.WpfViewers;assembly=Microsoft.Samples.Kinect.WpfViewers">
     <Grid>
         <Canvas Name="intro">
-            <Image Source="arrow_gradient_blue_right.png" Height="125" Panel.ZIndex="1" HorizontalAlignment="Left" Margin="99,334,0,0" Name="arrow" Stretch="Fill" VerticalAlignment="Top" Width="147" Canvas.Left="-60" Canvas.Top="0" />
+            <Image Source="arrow_gradient_blue_right.png" Height="125" Opacity="0.75" Panel.ZIndex="1" HorizontalAlignment="Left" Margin="99,334,0,0" Name="arrow" Stretch="Fill" VerticalAlignment="Top" Width="147" Canvas.Left="-60" Canvas.Top="0" />
             <Button Name="swipeComplete" Height="50" Width="120" Content="Swipe Complete" Canvas.Left="483" Canvas.Top="201" Click="swipeComplete_Click" Visibility="Hidden"></Button>
             <Controls:Intro></Controls:Intro>
             <Rectangle Canvas.Left="500" Canvas.Top="345" Fill="Black" Height="100" Name="swipeBox" Width="100" Visibility="Hidden"/>
-            <Button Canvas.Left="18" Canvas.Top="74" Content="asfdscs" Height="19" Name="button2" Width="75"  Click="swipeComplete_Click" Panel.ZIndex="2"/>
-
+            <Button Visibility="Hidden" Canvas.Left="18" Canvas.Top="74" Content="asfdscs" Height="19" Name="button2" Width="75"  Click="swipeComplete_Click" Panel.ZIndex="2"/>
         </Canvas>
         <Canvas Name="menu" Visibility="Hidden">
             <Controls:Menu></Controls:Menu>
-            <my:KinectSensorChooser Canvas.Left="139" Canvas.Top="164" Name="kinectSensorChooser1" Width="328" />
-            </Canvas>
+        </Canvas>
+        <my:KinectSensorChooser Name="kinectSensorChooser1" Width="328" Margin="723,92,-413,218" />
     </Grid>
 </Window>

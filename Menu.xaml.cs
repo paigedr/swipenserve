@@ -608,10 +608,15 @@ namespace Controls
                 // exit menu screen, show checkout
                 main.Visibility = System.Windows.Visibility.Hidden;
                 Canvas parent = (Canvas)this.Parent;
-                Label label1 = new Label();
+                /*Label label1 = new Label();
                 label1.Content = "Thanks for using Swipe n' Serve!\nYour order is waiting at the pick-up window.\nSee you again soon!";
                 label1.FontSize = 25;
-                parent.Children.Add(label1);
+                parent.Children.Add(label1);*/
+                Image image1 = new Image();
+                image1.Source = new BitmapImage(new Uri("Images/checkout.png", UriKind.Relative));
+                image1.Height = 500;
+                image1.Width = 650;
+                parent.Children.Add(image1);
                 parent.Children[0].Visibility = System.Windows.Visibility.Visible;
             }
             else
